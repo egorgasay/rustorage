@@ -1,0 +1,3 @@
+set qwe qdwd
+set www qdwqd
+get qwe
