@@ -1,6 +1,9 @@
 use std::collections::HashMap;
 use std::fmt;
 
+use crate::error::error::StorageError;
+
+
 pub struct Storage {
     m: HashMap<String, String>,
 }
@@ -29,19 +32,19 @@ impl Storage {
         Storage{m: map}
     }
     
-    pub fn set(&mut self, key: String, value: String, uniques: bool) -> Result<(), ErrorUnique> {
+    pub fn set(&mut self, key: String, value: String, uniques: bool) -> Result<(), StorageError> {
         if uniques {
-            return Err(ErrorUnique {});
+            return Err(StorageError::UniqueConstraint)
         }
 
         self.m.insert(key, value);
         Ok(())
     }
 
-    pub fn get(&self, key: String) -> Result<&String, ErrorNotFound> {
+    pub fn get(&self, key: String) -> Result<&String, StorageError> {
         match self.m.get(&key) {
             Some(v) => Ok(v),
-            None => Err(ErrorNotFound {})
+            None => Err(StorageError::NotFound)
         }
     }
 }

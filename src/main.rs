@@ -1,10 +1,8 @@
-mod storage;
-
 use std::io;
 use std::io::Read;
 use std::fs;
 
-pub use crate::storage::Storage;
+use storage::storage::storage::Storage;
 
 
 fn get_user_input() -> Result<String, io::Error> {
@@ -21,7 +19,7 @@ fn get_user_input() -> Result<String, io::Error> {
 
 
 fn main() {
-    let mut st = storage::Storage::new();
+    let mut st = Storage::new();
     
     let uinput = get_user_input().expect("something went wrong while reading user input!");
     
